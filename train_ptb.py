@@ -16,6 +16,7 @@ import chainer.functions as F
 import chainer.links as L
 from chainer import training
 from chainer.training import extensions
+from gen_index_vecs import *
 
 
 # Definition of a recurrent net for language modeling
@@ -174,7 +175,9 @@ def main():
     args = parser.parse_args()
 
     # Load the Penn Tree Bank long word sequence dataset
-    train, val, test = chainer.datasets.get_ptb_words()
+    # train, val, test = chainer.datasets.get_ptb_words()
+
+    train, val, test = get_data('country_lyrics.json', pct=.5)
     n_vocab = max(train) + 1  # train is just an array of integers
     print('#vocab =', n_vocab)
 
