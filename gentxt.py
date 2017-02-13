@@ -10,6 +10,7 @@ import sys
 
 import numpy as np
 import six
+import json
 
 import chainer
 from chainer import cuda
@@ -44,7 +45,7 @@ def main():
     xp = cuda.cupy if args.gpu >= 0 else np
 
     # load vocabulary
-    vocab = chainer.datasets.get_ptb_words_vocabulary()
+    vocab = json.load(open("vocab_indexes.json"))
     ivocab = {}
     for c, i in vocab.items():
         ivocab[i] = c
