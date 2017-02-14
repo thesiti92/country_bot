@@ -17,7 +17,6 @@ def get_data(fname, pct=1):
     total = np.array(get_indexes(fname), dtype=np.int32)
     return np.split(total[:int(pct*len(total))], [int(.7*pct*len(total)), int(.9*pct*len(total))]), max(total)+1
 if __name__ == "__main__":
-    json.dump(get_indexes("country_lyrics.json"), open("indexes.json", "w+"))
+    json.dump(get_data("country_lyrics.json"), open("lyric_indexes.json", "w+"))
     #train, test, val = get_data('country_lyrics.json')
     #print len(train), len(test), len(val)
->>>>>>> parent of a016d59... fixed merge colflictsgit diff! :)
