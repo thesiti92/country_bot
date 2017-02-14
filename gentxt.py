@@ -10,7 +10,6 @@ import sys
 
 import numpy as np
 import six
-import json
 
 import chainer
 from chainer import cuda

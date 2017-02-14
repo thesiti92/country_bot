@@ -131,9 +131,10 @@ class BPTTUpdater(training.StandardUpdater):
             # Concatenate the word IDs to matrices and send them to the device
             # self.converter does this job
             # (it is chainer.dataset.concat_examples by default)
-            x, t = self.converter(batch, self.device).astype(np.int32)
-
-            # Compute the loss at this time step and accumulate it
+            x, t = self.converter(batch, self.device)
+            x = x.astype(np.int32) 
+            t = t.astype(np.int32)# Compute the loss at this time step and accumulate it
+>>>>>>> parent of a016d59... fixed merge colflictsgit diff! :)
             loss += optimizer.target(chainer.Variable(x), chainer.Variable(t))
 
         optimizer.target.cleargrads()  # Clear the parameter gradients
@@ -236,7 +237,11 @@ def main():
     eval_rnn.reset_state()
     evaluator = extensions.Evaluator(test_iter, eval_model, device=args.gpu)
     result = evaluator()
+<<<<<<< HEAD
     # print('test perplexity:', np.exp(float(result['main/loss'])))
+=======
+#    print('test perplexity:', np.exp(float(result['main/loss'])))
+>>>>>>> parent of a016d59... fixed merge colflictsgit diff! :)
 
 
 if __name__ == '__main__':
