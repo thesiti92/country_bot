@@ -10,14 +10,14 @@ import sys
 
 import numpy as np
 import six
-
+import json
 import chainer
 from chainer import cuda
 import chainer.functions as F
 import chainer.links as L
 from chainer import serializers
 
-import train_ptb
+import train_country_bot
 
 
 def main():
@@ -52,7 +52,7 @@ def main():
     # should be same as n_units , described in train_ptb.py
     n_units = args.unit
 
-    lm = train_ptb.RNNForLM(len(vocab), n_units, train=False)
+    lm = train_country_bot.RNNForLM(len(vocab), n_units, train=False)
     model = L.Classifier(lm)
 
     serializers.load_npz(args.model, model)
