@@ -11,7 +11,7 @@ def get_indexes(fname):
     lyrics = json.load(open(fname))
     word_list  = [filter_word(word) for word in " <eos> ".join(lyrics).replace("\\n\\n", "\\n").replace("\\n", " <eos> ").replace("\"", " ").split()]
     vocab = get_vocab(word_list)
-    json.dump(vocab, open("vocab_indexes.json", "w+"))
+    # json.dump(vocab, open("vocab_indexes.json", "w+"))
     return [vocab[word] for word in word_list]
 def get_data(fname, pct=.3):
     total = np.array(get_indexes(fname), dtype=np.int32)
@@ -19,6 +19,6 @@ def get_data(fname, pct=.3):
 if __name__ == "__main__":
     data = get_data("country_lyrics.json")
     indexes = data[0]
-    json.dump({"train": indexes[0].tolist(), "val": indexes[1].tolist(), "test": indexes[2].tolist(), "num_vocab": data[1]}, open("lyric_indexes.json", "w+"))
+    # json.dump({"train": indexes[0].tolist(), "val": indexes[1].tolist(), "test": indexes[2].tolist(), "num_vocab": data[1]}, open("lyric_indexes.json", "w+"))
     #train, test, val = get_data('country_lyrics.json')
     #print len(train), len(test), len(val)
