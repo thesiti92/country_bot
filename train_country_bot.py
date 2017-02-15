@@ -10,13 +10,12 @@ from __future__ import print_function
 import argparse
 
 import numpy as np
-
+import json
 import chainer
 import chainer.functions as F
 import chainer.links as L
 from chainer import training
 from chainer.training import extensions
-from gen_index_vecs import *
 
 
 # Definition of a recurrent net for language modeling
@@ -176,9 +175,11 @@ def main():
 
     # Load the Penn Tree Bank long word sequence dataset
     # train, val, test = chainer.datasets.get_ptb_words()
-
-    train, val, test = get_data('country_lyrics.json', pct=.5)
-    n_vocab = max(train) + 1  # train is just an array of integers
+    data = json.load(open("lyric_indexes.json"))
+    train = np.array(data['train'])
+    val = np.array(data['val'])
+    test = np.array(data['test'])
+    n_vocab = data['num_vocab'] # train is just an array of integers
     print('#vocab =', n_vocab)
 
     if args.test:
