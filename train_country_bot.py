@@ -130,9 +130,10 @@ class BPTTUpdater(training.StandardUpdater):
             # Concatenate the word IDs to matrices and send them to the device
             # self.converter does this job
             # (it is chainer.dataset.concat_examples by default)
-            x, t = self.converter(batch, self.device)
-            x = x.astype(np.int32)
-            t = t.astype(np.int32)# Compute the loss at this time step and accumulate it
+            x_64, t_64 = self.converter(batch, self.device)
+            x = x_64.astype(np.int32)
+            t = t_64.astype(np.int32)
+            # Compute the loss at this time step and accumulate it
             loss += optimizer.target(chainer.Variable(x), chainer.Variable(t))
 
         optimizer.target.cleargrads()  # Clear the parameter gradients
@@ -176,9 +177,9 @@ def main():
     # Load the Penn Tree Bank long word sequence dataset
     # train, val, test = chainer.datasets.get_ptb_words()
     data = json.load(open("lyric_indexes.json"))
-    train = np.array(data['train'])
-    val = np.array(data['val'])
-    test = np.array(data['test'])
+    train = np.array(data['train'], dtype=np.int32)
+    val = np.array(data['val'], dtype=np.int32)
+    test = np.array(data['test'], dtype=np.int32)
     n_vocab = data['num_vocab'] # train is just an array of integers
     print('#vocab =', n_vocab)
 
