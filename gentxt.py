@@ -86,7 +86,7 @@ def main():
             index = np.argmax(cuda.to_cpu(prob.data))
 
         if ivocab[index] == '<eos>':
-            sys.stdout.write('.')
+            sys.stdout.write('\\n')
         else:
             sys.stdout.write(ivocab[index] + ' ')
 
