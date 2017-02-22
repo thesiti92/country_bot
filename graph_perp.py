@@ -9,7 +9,7 @@ trace = go.Scatter(
     mode="markers"
 )
 layout = go.Layout(
-    title='Perplexity of Country Bot',
+    title='Perplexity of Country Bot with 200 Units',
     xaxis={
         "title": 'Number of Iterations'
     },
@@ -18,5 +18,5 @@ layout = go.Layout(
     }
 )
 fig = go.Figure(data=[trace], layout=layout)
-plot_url = py.plot(fig, filename='perplexity')
+plot_url = py.plot(fig, filename='perplexity_200_unit')
 print plot_url
